@@ -30,8 +30,8 @@ func (n *Node) insert(key int, val string) *Node {
 	return n
 }
 
-// Search recursively searches the tree for a key and returns its value
-// If no value is found, an error string is still returned
+// Search searches the tree for a key and returns the node associated with that
+// key and the depth of the node. If the node does not exists, nil is returned as the node
 func (n *Node) search(key int) (*Node, int) {
 	depth := 0
 	for {
@@ -48,6 +48,7 @@ func (n *Node) search(key int) (*Node, int) {
 	}
 }
 
+// findMin finds the minimal value from a starting node
 func (n *Node) findMin() *Node {
 	for {
 		if n.left != nil {
@@ -58,6 +59,7 @@ func (n *Node) findMin() *Node {
 	}
 }
 
+// delete removes nodes from the tree and moves nodes around as needed
 func (n *Node) delete(key int) *Node {
 	if n == nil {
 		return nil
