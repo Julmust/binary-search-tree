@@ -30,6 +30,8 @@ func (n *Node) insert(key int, val string) *Node {
 	return n
 }
 
+// Search recursively searches the tree for a key and returns its value
+// If no value is found, an error string is still returned
 func (n *Node) search(key int) string {
 	if n == nil {
 		return "Key not found"
