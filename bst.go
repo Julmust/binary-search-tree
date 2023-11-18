@@ -32,16 +32,61 @@ func (n *Node) insert(key int, val string) *Node {
 
 // Search recursively searches the tree for a key and returns its value
 // If no value is found, an error string is still returned
-func (n *Node) search(key int) string {
+func (n *Node) search(key int) (*Node, int) {
+	depth := 0
+	for {
+		if n == nil {
+			return nil, depth
+		} else if n.key > key {
+			n = n.left
+		} else if n.key < key {
+			n = n.right
+		} else if n.key == key {
+			return n, depth
+		}
+		depth += 1
+	}
+}
+
+func (n *Node) findMin() *Node {
+	for {
+		if n.left != nil {
+			n = n.left
+		} else {
+			return n
+		}
+	}
+}
+
+func (n *Node) delete(key int) *Node {
 	if n == nil {
-		return "Key not found"
+		return nil
 	} else if n.key > key {
-		return n.left.search(key)
+		n.left = n.left.delete(key)
 	} else if n.key < key {
-		return n.right.search(key)
+		n.right = n.right.delete(key)
+	} else {
+		// No children
+		if n.left == nil && n.right == nil {
+			n = nil
+
+			// One child
+		} else if n.left == nil {
+			n = n.right
+		} else if n.right == nil {
+			n = n.left
+
+			// Two children
+		} else {
+			node_min_right := n.right.findMin()
+			n.key = node_min_right.key
+			n.val = node_min_right.val
+
+			n.right.delete(n.key)
+		}
 	}
 
-	return n.val
+	return n
 }
 
 // Traversal is used to print the tree, with the corresponding level of the
