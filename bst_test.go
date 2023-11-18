@@ -23,6 +23,15 @@ func TestInsert(t *testing.T) {
 	}
 }
 
+func TestTraversal(t *testing.T) {
+	var root *Node
+	root = root.insert(5, "data")
+	root = root.insert(10, "data")
+	root = root.insert(1, "data")
+
+	root.traversal(0)
+}
+
 func TestNodeCreation(t *testing.T) {
 	newNode := Node{key: 1, val: "data", left: nil, right: nil}
 

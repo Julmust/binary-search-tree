@@ -1,5 +1,7 @@
 package bst
 
+import "fmt"
+
 type Node struct {
 	key         int
 	val         string
@@ -19,4 +21,12 @@ func (n *Node) insert(key int, val string) *Node {
 	}
 
 	return n
+}
+
+func (n *Node) traversal(lvl int) {
+	if n != nil {
+		n.left.traversal(lvl + 1)
+		fmt.Println(lvl, n.key, n.val)
+		n.right.traversal(lvl + 1)
+	}
 }
