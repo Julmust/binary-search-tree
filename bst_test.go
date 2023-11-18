@@ -5,9 +5,21 @@ import (
 )
 
 func TestInsert(t *testing.T) {
-	got := insert()
-	if !got {
-		t.Error("Insert returned false")
+	var root *Node
+	root = root.insert(5, "data")
+	root = root.insert(10, "data")
+	root = root.insert(1, "data")
+
+	if root.key != 5 || root.val != "data" {
+		t.Error("Insert failed")
+	}
+
+	if root.right.key != 10 {
+		t.Error("Right insert failed")
+	}
+
+	if root.left.key != 1 {
+		t.Error("Left insert failed")
 	}
 }
 
