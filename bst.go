@@ -30,6 +30,18 @@ func (n *Node) insert(key int, val string) *Node {
 	return n
 }
 
+func (n *Node) search(key int) string {
+	if n == nil {
+		return "Key not found"
+	} else if n.key > key {
+		return n.left.search(key)
+	} else if n.key < key {
+		return n.right.search(key)
+	}
+
+	return n.val
+}
+
 // Traversal is used to print the tree, with the corresponding level of the
 // records found
 func (n *Node) traversal(lvl int) {

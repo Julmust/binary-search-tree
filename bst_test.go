@@ -23,6 +23,33 @@ func TestInsert(t *testing.T) {
 	}
 }
 
+func TestSearch(t *testing.T) {
+	var root *Node
+	root = root.insert(5, "data")
+	root = root.insert(10, "data")
+	root = root.insert(1, "data")
+
+	should_fail := root.search(0)
+	if should_fail != "Key not found" {
+		t.Errorf("Expected error to be raise, received: %v", should_fail)
+	}
+
+	should_pass_root := root.search(5)
+	if should_pass_root != "data" {
+		t.Errorf("Search root: Expected \"data\", received: %v", should_pass_root)
+	}
+
+	should_pass_left := root.search(1)
+	if should_pass_left != "data" {
+		t.Errorf("Search left: Expected \"data\", received: %v", should_pass_left)
+	}
+
+	should_pass_right := root.search(10)
+	if should_pass_right != "data" {
+		t.Errorf("Search right: Expected \"data\", received: %v", should_pass_right)
+	}
+}
+
 func TestTraversal(t *testing.T) {
 	var root *Node
 	root = root.insert(5, "data")
