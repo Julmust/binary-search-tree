@@ -13,7 +13,7 @@ type Node struct {
 
 // Insert recursively adds a node to the BST by traversing it, finding the
 // first free location
-func (n *Node) insert(key int, val string) *Node {
+func (n *Node) Insert(key int, val string) *Node {
 	// If the current node does not exist, it's created and returned
 	// to the calling method, which adds it to the tree
 	if n == nil {
@@ -22,9 +22,9 @@ func (n *Node) insert(key int, val string) *Node {
 	}
 
 	if n.key > key {
-		n.left = n.left.insert(key, val)
+		n.left = n.left.Insert(key, val)
 	} else if n.key < key {
-		n.right = n.right.insert(key, val)
+		n.right = n.right.Insert(key, val)
 	}
 
 	return n
@@ -32,7 +32,7 @@ func (n *Node) insert(key int, val string) *Node {
 
 // Search searches the tree for a key and returns the node associated with that
 // key and the depth of the node. If the node does not exists, nil is returned as the node
-func (n *Node) search(key int) (*Node, int) {
+func (n *Node) Search(key int) (*Node, int) {
 	depth := 0
 	for {
 		if n == nil {
@@ -49,7 +49,7 @@ func (n *Node) search(key int) (*Node, int) {
 }
 
 // findMin finds the minimal value from a starting node
-func (n *Node) findMin() *Node {
+func (n *Node) FindMin() *Node {
 	for {
 		if n.left != nil {
 			n = n.left
@@ -60,13 +60,13 @@ func (n *Node) findMin() *Node {
 }
 
 // delete removes nodes from the tree and moves nodes around as needed
-func (n *Node) delete(key int) *Node {
+func (n *Node) Delete(key int) *Node {
 	if n == nil {
 		return nil
 	} else if n.key > key {
-		n.left = n.left.delete(key)
+		n.left = n.left.Delete(key)
 	} else if n.key < key {
-		n.right = n.right.delete(key)
+		n.right = n.right.Delete(key)
 	} else {
 		// No children
 		if n.left == nil && n.right == nil {
@@ -80,11 +80,11 @@ func (n *Node) delete(key int) *Node {
 
 			// Two children
 		} else {
-			node_min_right := n.right.findMin()
+			node_min_right := n.right.FindMin()
 			n.key = node_min_right.key
 			n.val = node_min_right.val
 
-			n.right.delete(n.key)
+			n.right.Delete(n.key)
 		}
 	}
 
@@ -93,10 +93,10 @@ func (n *Node) delete(key int) *Node {
 
 // Traversal is used to print the tree, with the corresponding level of the
 // records found
-func (n *Node) traversal(lvl int) {
+func (n *Node) Traversal(lvl int) {
 	if n != nil {
-		n.left.traversal(lvl + 1)
+		n.left.Traversal(lvl + 1)
 		fmt.Println(lvl, n.key, n.val)
-		n.right.traversal(lvl + 1)
+		n.right.Traversal(lvl + 1)
 	}
 }
